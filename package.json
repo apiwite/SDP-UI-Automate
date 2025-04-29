@@ -1,0 +1,14 @@
+{
+  "name": "sdp-ui",
+  "version": "1.0.0",
+  "description": "SDP UI Test with Cypress",
+  "scripts": {
+    "test": "cypress open",
+    "test:headless": "cypress run"
+  },
+  "devDependencies": {
+    "cypress": "^14.3.2",
+    "cypress-file-upload": "^5.0.8",
+    "typescript": "^5.0.4"
+  }
+}
