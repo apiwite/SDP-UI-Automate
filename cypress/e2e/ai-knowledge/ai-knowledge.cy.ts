@@ -1,3 +1,5 @@
+import { pdfTestCases, csvTestCases, xlsxTestCases, pngTestCases, docxTestCases } from './constants/ai-knowledge.constants'
+
 describe('AI Knowledge - การทดสอบทั้งหมด', () => {
   beforeEach(() => {
     cy.login()
@@ -7,83 +9,83 @@ describe('AI Knowledge - การทดสอบทั้งหมด', () => {
   describe('การสร้าง Knowledge', () => {
     describe('ไฟล์ PDF', () => {
       it('สามารถสร้าง Knowledge ด้วยไฟล์ PDF พื้นฐาน', () => {
-        cy.createKnowledge_File()
+        cy.createKnowledge_File('pdf.basic')
         
         // ตรวจสอบว่าสร้างสำเร็จ
         cy.url().should('include', '/#/knowledge')
-        cy.searchKnowledge('Test_pdf_cy')
-        cy.contains('Test_pdf_cy').should('be.visible')
+        cy.searchKnowledge(pdfTestCases.basic.knowledgeName)
+        cy.contains(pdfTestCases.basic.knowledgeName).should('be.visible')
       })
 
-      it('สามารถสร้าง Knowledge ด้วยไฟล์ PDF และขนาดชั้นข้อมูลใหญ่', () => {
-        cy.createKnowledge_File('withLargeChunkSize')
+    //   it('สามารถสร้าง Knowledge ด้วยไฟล์ PDF และขนาดชั้นข้อมูลใหญ่', () => {
+    //     cy.createKnowledge_File('pdf.withLargeChunkSize')
         
-        // ตรวจสอบว่าสร้างสำเร็จ
-        cy.url().should('include', '/#/knowledge')
-        cy.searchKnowledge('PDF_Large_Chunk')
-        cy.contains('PDF_Large_Chunk').should('be.visible')
-      })
+    //     // ตรวจสอบว่าสร้างสำเร็จ
+    //     cy.url().should('include', '/#/knowledge')
+    //     cy.searchKnowledge(pdfTestCases.withLargeChunkSize.knowledgeName)
+    //     cy.contains(pdfTestCases.withLargeChunkSize.knowledgeName).should('be.visible')
+    //   })
     })
 
     describe('ไฟล์ CSV', () => {
       it('สามารถสร้าง Knowledge ด้วยไฟล์ CSV พื้นฐาน', () => {
-        cy.createKnowledge_File('basic') // ใช้ชื่อเคส basic จาก csvTestCases
+        cy.createKnowledge_File('csv.basic')
         
         // ตรวจสอบว่าสร้างสำเร็จ
         cy.url().should('include', '/#/knowledge')
-        cy.searchKnowledge('CSV_Knowledge_Basic')
-        cy.contains('CSV_Knowledge_Basic').should('be.visible')
+        cy.searchKnowledge(csvTestCases.basic.knowledgeName)
+        cy.contains(csvTestCases.basic.knowledgeName).should('be.visible')
       })
 
       it('สามารถสร้าง Knowledge ด้วยชื่อที่กำหนดเอง', () => {
-        cy.createKnowledge_File('withCustomName')
+        cy.createKnowledge_File('csv.withCustomName')
         
         // ตรวจสอบว่าสร้างสำเร็จ
         cy.url().should('include', '/#/knowledge')
-        cy.searchKnowledge('Custom_Name_Knowledge')
-        cy.contains('Custom_Name_Knowledge').should('be.visible')
+        cy.searchKnowledge(csvTestCases.withCustomName.knowledgeName)
+        cy.contains(csvTestCases.withCustomName.knowledgeName).should('be.visible')
       })
     })
 
 //     describe('ไฟล์ Excel', () => {
 //       it('สามารถสร้าง Knowledge ด้วยไฟล์ Excel พื้นฐาน', () => {
-//         cy.createKnowledge_File('basic') // ใช้ชื่อเคส basic จาก xlsxTestCases
+//         cy.createKnowledge_File('xlsx.basic')
         
 //         // ตรวจสอบว่าสร้างสำเร็จ
 //         cy.url().should('include', '/#/knowledge')
-//         cy.searchKnowledge('Excel_Knowledge_Basic')
-//         cy.contains('Excel_Knowledge_Basic').should('be.visible')
+//         cy.searchKnowledge(xlsxTestCases.basic.knowledgeName)
+//         cy.contains(xlsxTestCases.basic.knowledgeName).should('be.visible')
 //       })
 
 //       it('สามารถสร้าง Knowledge ด้วยแท็กที่กำหนดเอง', () => {
-//         cy.createKnowledge_File('withCustomTags')
+//         cy.createKnowledge_File('xlsx.withCustomTags')
         
 //         // ตรวจสอบว่าสร้างสำเร็จ
 //         cy.url().should('include', '/#/knowledge')
-//         cy.searchKnowledge('Test_AI_Knowledge_cy')
-//         cy.contains('Test_AI_Knowledge_cy').should('be.visible')
+//         cy.searchKnowledge(xlsxTestCases.withCustomTags.knowledgeName)
+//         cy.contains(xlsxTestCases.withCustomTags.knowledgeName).should('be.visible')
 //       })
 //     })
 
 //     describe('ไฟล์รูปภาพ PNG', () => {
 //       it('สามารถสร้าง Knowledge ด้วยไฟล์รูปภาพ PNG', () => {
-//         cy.createKnowledge_File('basic') // ใช้ชื่อเคส basic จาก pngTestCases
+//         cy.createKnowledge_File('png.basic')
         
 //         // ตรวจสอบว่าสร้างสำเร็จ
 //         cy.url().should('include', '/#/knowledge')
-//         cy.searchKnowledge('Image_Knowledge_Basic')
-//         cy.contains('Image_Knowledge_Basic').should('be.visible')
+//         cy.searchKnowledge(pngTestCases.basic.knowledgeName)
+//         cy.contains(pngTestCases.basic.knowledgeName).should('be.visible')
 //       })
 //     })
 
 //     describe('ไฟล์ Word', () => {
 //       it('สามารถสร้าง Knowledge ด้วยไฟล์ Word พื้นฐาน', () => {
-//         cy.createKnowledge_File('basic') // ใช้ชื่อเคส basic จาก docxTestCases
+//         cy.createKnowledge_File('docx.basic')
         
 //         // ตรวจสอบว่าสร้างสำเร็จ
 //         cy.url().should('include', '/#/knowledge')
-//         cy.searchKnowledge('Test_pdf_cy')
-//         cy.contains('Test_pdf_cy').should('be.visible')
+//         cy.searchKnowledge(docxTestCases.basic.knowledgeName)
+//         cy.contains(docxTestCases.basic.knowledgeName).should('be.visible')
 //       })
 //     })
 

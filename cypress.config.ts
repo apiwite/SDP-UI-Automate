@@ -1,5 +1,5 @@
 import { defineConfig } from 'cypress'
-import { existsSync } from 'fs'
+import { existsSync, statSync } from 'fs'
 import * as path from 'path'
 
 export default defineConfig({
@@ -16,7 +16,7 @@ export default defineConfig({
         },
         getFileSize(filePath) {
           const resolvedPath = path.resolve(filePath)
-          return existsSync(resolvedPath) ? existsSync(resolvedPath) : 0
+          return existsSync(resolvedPath) ? statSync(resolvedPath).size : 0
         }
       })
     },

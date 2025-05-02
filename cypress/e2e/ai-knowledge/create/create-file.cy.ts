@@ -1,4 +1,4 @@
-import { defaultConfig } from '../constants/ai-knowledge.constants'
+import { defaultConfig, pdfTestCases, csvTestCases, xlsxTestCases, pngTestCases, docxTestCases } from '../constants/ai-knowledge.constants'
 
 describe('การสร้าง AI Knowledge ด้วยไฟล์', () => {
   beforeEach(() => {
@@ -19,102 +19,102 @@ describe('การสร้าง AI Knowledge ด้วยไฟล์', () =>
 
   describe('ทดสอบไฟล์ PDF', () => {
     it('สามารถสร้าง Knowledge ด้วยไฟล์ PDF พื้นฐาน', () => {
-      cy.createKnowledge_File('basic')
+      cy.createKnowledge_File('pdf.basic')  // ระบุประเภทไฟล์ให้ชัดเจน
       
       // ตรวจสอบว่าสร้างสำเร็จ
       cy.url().should('include', '/#/knowledge')
-      cy.searchKnowledge('PDF_Knowledge_Basic')
-      cy.contains('PDF_Knowledge_Basic').should('be.visible')
+      cy.searchKnowledge(pdfTestCases.basic.knowledgeName)
+      cy.contains(pdfTestCases.basic.knowledgeName).should('be.visible')
     })
 
     it('สามารถสร้าง Knowledge ด้วยไฟล์ PDF ที่มี Chunk Size ใหญ่', () => {
-      cy.createKnowledge_File('withLargeChunkSize')
+      cy.createKnowledge_File('pdf.withLargeChunkSize')  // ระบุประเภทไฟล์ให้ชัดเจน
       
       // ตรวจสอบว่าสร้างสำเร็จ
       cy.url().should('include', '/#/knowledge')
-      cy.searchKnowledge('PDF_Large_Chunk')
-      cy.contains('PDF_Large_Chunk').should('be.visible')
+      cy.searchKnowledge(pdfTestCases.withLargeChunkSize.knowledgeName)
+      cy.contains(pdfTestCases.withLargeChunkSize.knowledgeName).should('be.visible')
     })
   })
 
   describe('ทดสอบไฟล์ CSV', () => {
     it('สามารถสร้าง Knowledge ด้วยไฟล์ CSV พื้นฐาน', () => {
-      cy.createKnowledge_File('CSV_Knowledge_Basic')
+      cy.createKnowledge_File('csv.basic')  // ระบุประเภทไฟล์ให้ชัดเจน
       
       // ตรวจสอบว่าสร้างสำเร็จ
       cy.url().should('include', '/#/knowledge')
-      cy.searchKnowledge('CSV_Knowledge_Basic')
-      cy.contains('CSV_Knowledge_Basic').should('be.visible')
+      cy.searchKnowledge(csvTestCases.basic.knowledgeName)
+      cy.contains(csvTestCases.basic.knowledgeName).should('be.visible')
     })
 
     it('สามารถสร้าง Knowledge ด้วยไฟล์ CSV ที่มีชื่อกำหนดเอง', () => {
-      cy.createKnowledge_File('Custom_Name_CSV')
+      cy.createKnowledge_File('csv.withCustomName')  // ระบุประเภทไฟล์ให้ชัดเจน
       
       // ตรวจสอบว่าสร้างสำเร็จ
       cy.url().should('include', '/#/knowledge')
-      cy.searchKnowledge('Custom_Name_CSV')
-      cy.contains('Custom_Name_CSV').should('be.visible')
+      cy.searchKnowledge(csvTestCases.withCustomName.knowledgeName)
+      cy.contains(csvTestCases.withCustomName.knowledgeName).should('be.visible')
     })
   })
 
   describe('ทดสอบไฟล์ Excel', () => {
     it('สามารถสร้าง Knowledge ด้วยไฟล์ Excel พื้นฐาน', () => {
-      cy.createKnowledge_File('Excel_Knowledge_Basic')
+      cy.createKnowledge_File('xlsx.basic')  // ระบุประเภทไฟล์ให้ชัดเจน
       
       // ตรวจสอบว่าสร้างสำเร็จ
       cy.url().should('include', '/#/knowledge')
-      cy.searchKnowledge('Excel_Knowledge_Basic')
-      cy.contains('Excel_Knowledge_Basic').should('be.visible')
+      cy.searchKnowledge(xlsxTestCases.basic.knowledgeName)
+      cy.contains(xlsxTestCases.basic.knowledgeName).should('be.visible')
     })
 
     it('สามารถสร้าง Knowledge ด้วยไฟล์ Excel ที่มีแท็กกำหนดเอง', () => {
-      cy.createKnowledge_File('Excel_Custom_Tags')
+      cy.createKnowledge_File('xlsx.withCustomTags')  // ระบุประเภทไฟล์ให้ชัดเจน
       
       // ตรวจสอบว่าสร้างสำเร็จ
       cy.url().should('include', '/#/knowledge')
-      cy.searchKnowledge('Excel_Custom_Tags')
-      cy.contains('Excel_Custom_Tags').should('be.visible')
+      cy.searchKnowledge(xlsxTestCases.withCustomTags.knowledgeName)
+      cy.contains(xlsxTestCases.withCustomTags.knowledgeName).should('be.visible')
       
       // ตรวจสอบแท็ก
-      cy.contains('Excel_Custom_Tags').click()
-      cy.get('.knowledge-detail .mat-chip').contains('Custom_Tag1').should('exist')
-      cy.get('.knowledge-detail .mat-chip').contains('Custom_Tag2').should('exist')
+      cy.contains(xlsxTestCases.withCustomTags.knowledgeName).click()
+      cy.get('.knowledge-detail .mat-chip').contains(xlsxTestCases.withCustomTags.tags[0]).should('exist')
+      cy.get('.knowledge-detail .mat-chip').contains(xlsxTestCases.withCustomTags.tags[1]).should('exist')
     })
   })
 
   describe('ทดสอบไฟล์รูปภาพ', () => {
     it('สามารถสร้าง Knowledge ด้วยไฟล์รูปภาพ PNG', () => {
-      cy.createKnowledge_File('Image_Knowledge_Basic')
+      cy.createKnowledge_File('png.basic')  // ระบุประเภทไฟล์ให้ชัดเจน
       
       // ตรวจสอบว่าสร้างสำเร็จ
       cy.url().should('include', '/#/knowledge')
-      cy.searchKnowledge('Image_Knowledge_Basic')
-      cy.contains('Image_Knowledge_Basic').should('be.visible')
+      cy.searchKnowledge(pngTestCases.basic.knowledgeName)
+      cy.contains(pngTestCases.basic.knowledgeName).should('be.visible')
     })
   })
 
   describe('ทดสอบไฟล์ Word', () => {
     it('สามารถสร้าง Knowledge ด้วยไฟล์ Word พื้นฐาน', () => {
-      cy.createKnowledge_File('Test_pdf_cy')
+      cy.createKnowledge_File('docx.basic')  // ระบุประเภทไฟล์ให้ชัดเจน
       
       // ตรวจสอบว่าสร้างสำเร็จ
       cy.url().should('include', '/#/knowledge')
-      cy.searchKnowledge('Test_pdf_cy')
-      cy.contains('Test_pdf_cy').should('be.visible')
+      cy.searchKnowledge(docxTestCases.basic.knowledgeName)
+      cy.contains(docxTestCases.basic.knowledgeName).should('be.visible')
     })
 
     it('สามารถสร้าง Knowledge ด้วยไฟล์ Word ที่มีแท็กกำหนดเอง', () => {
-      cy.createKnowledge_File('Word_Custom_Tags')
+      cy.createKnowledge_File('docx.withCustomTags')  // ระบุประเภทไฟล์ให้ชัดเจน
       
       // ตรวจสอบว่าสร้างสำเร็จ
       cy.url().should('include', '/#/knowledge')
-      cy.searchKnowledge('Word_Custom_Tags')
-      cy.contains('Word_Custom_Tags').should('be.visible')
+      cy.searchKnowledge(docxTestCases.withCustomTags.knowledgeName)
+      cy.contains(docxTestCases.withCustomTags.knowledgeName).should('be.visible')
       
       // ตรวจสอบแท็ก
-      cy.contains('Word_Custom_Tags').click()
-      cy.get('.knowledge-detail .mat-chip').contains('Custom_Tag1').should('exist')
-      cy.get('.knowledge-detail .mat-chip').contains('Custom_Tag2').should('exist')
+      cy.contains(docxTestCases.withCustomTags.knowledgeName).click()
+      cy.get('.knowledge-detail .mat-chip').contains(docxTestCases.withCustomTags.tags[0]).should('exist')
+      cy.get('.knowledge-detail .mat-chip').contains(docxTestCases.withCustomTags.tags[1]).should('exist')
     })
   })
 
@@ -159,21 +159,21 @@ describe('การสร้าง AI Knowledge ด้วยไฟล์', () =>
 
   describe('ทดสอบสำหรับการอัปเดตและลบ', () => {
     it('สามารถสร้าง Knowledge สำหรับการอัปเดต PDF', () => {
-      cy.createKnowledge_File('forUpdate')
+      cy.createKnowledge_File('pdf.forUpdate')  // ระบุประเภทไฟล์ให้ชัดเจน
       
       // ตรวจสอบว่าสร้างสำเร็จ
       cy.url().should('include', '/#/knowledge')
-      cy.searchKnowledge('Update_Knowledge_PDF')
-      cy.contains('Update_Knowledge_PDF').should('be.visible')
+      cy.searchKnowledge(pdfTestCases.forUpdate.knowledgeName)
+      cy.contains(pdfTestCases.forUpdate.knowledgeName).should('be.visible')
     })
 
     it('สามารถสร้าง Knowledge สำหรับการลบ PDF', () => {
-      cy.createKnowledge_File('forDelete')
+      cy.createKnowledge_File('pdf.forDelete')  // ระบุประเภทไฟล์ให้ชัดเจน
       
       // ตรวจสอบว่าสร้างสำเร็จ
       cy.url().should('include', '/#/knowledge')
-      cy.searchKnowledge('Delete_Knowledge_PDF')
-      cy.contains('Delete_Knowledge_PDF').should('be.visible')
+      cy.searchKnowledge(pdfTestCases.forDelete.knowledgeName)
+      cy.contains(pdfTestCases.forDelete.knowledgeName).should('be.visible')
     })
   })
 }) 

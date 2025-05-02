@@ -2,8 +2,9 @@
 export const defaultConfig = {
   knowledgeName: 'Test_pdf_cy',
   modelName: 'sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2',
+  embeddingModel: 'sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2',
   fileReader: 'Simple Reader',
-  fileName: 'XPeng_G6.pdf',
+  fileName: 'pdf/XPeng_G6.pdf',
   fileType: 'application/pdf',
   tags: ['Test_by_cypress', 'PDF', 'sentence-transformers','1'],
   chunkSize: '200'
@@ -12,29 +13,33 @@ export const defaultConfig = {
 // กรณีทดสอบต่างๆ สำหรับไฟล์ PDF
 export const pdfTestCases = {
   basic: {
-    knowledgeName: 'Test_pdf_cy',
-    fileName: 'XPeng_G6.pdf',
+    knowledgeName: 'PDF_Knowledge_Basic',
+    fileName: 'pdf/XPeng_G6.pdf',
     fileType: 'application/pdf',
-    tags: ['PDF', 'Test', 'Basic', '1']
+    embeddingModel: 'sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2',
+    tags: ['PDF', 'Test', 'Basic']
   },
   withLargeChunkSize: {
     knowledgeName: 'PDF_Large_Chunk',
-    fileName: 'dummy.pdf',
+    fileName: 'pdf/XPeng_G6.pdf',
     fileType: 'application/pdf',
-    tags: ['PDF', 'Test', 'LargeChunk','2'],
+    embeddingModel: 'sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2',
+    tags: ['PDF', 'Test', 'LargeChunk'],
     chunkSize: '500'
   },
   forUpdate: {
     knowledgeName: 'Update_Knowledge_PDF',
-    fileName: 'dummy.pdf',
+    fileName: 'pdf/XPeng_G6.pdf',
     fileType: 'application/pdf',
-    tags: ['Update', 'Test', 'PDF','3']
+    embeddingModel: 'intfloat/multilingual-e5-base',
+    tags: ['Update', 'Test', 'PDF']
   },
   forDelete: {
     knowledgeName: 'Delete_Knowledge_PDF',
-    fileName: 'dummy.pdf',
+    fileName: 'pdf/XPeng_G6.pdf',
     fileType: 'application/pdf',
-    tags: ['Delete', 'Test', 'PDF','4']
+    embeddingModel: 'sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2',
+    tags: ['Delete', 'Test', 'PDF']
   }
 }
 
@@ -42,27 +47,31 @@ export const pdfTestCases = {
 export const csvTestCases = {
   basic: {
     knowledgeName: 'CSV_Knowledge_Basic',
-    fileName: 'dummy.pdf',
-    fileType: 'application/pdf',
-    tags: ['CSV', 'Test', 'Basic','1']
+    fileName: 'csv/day.csv',
+    fileType: 'text/csv',
+    embeddingModel: 'intfloat/multilingual-e5-base',
+    tags: ['CSV', 'Test', 'Basic']
   },
   withCustomName: {
     knowledgeName: 'Custom_Name_CSV',
-    fileName: 'dummy.pdf',
-    fileType: 'application/pdf',
-    tags: ['CSV', 'Test', 'CustomName','2']
+    fileName: 'csv/day.csv',
+    fileType: 'text/csv',
+    embeddingModel: 'sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2',
+    tags: ['CSV', 'Test', 'CustomName']
   },
   forUpdate: {
     knowledgeName: 'Update_Knowledge_CSV',
-    fileName: 'dummy.pdf',
-    fileType: 'application/pdf',
-    tags: ['Update', 'Test', 'CSV','3']
+    fileName: 'csv/day.csv',
+    fileType: 'text/csv',
+    embeddingModel: 'sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2',
+    tags: ['Update', 'Test', 'CSV']
   },
   forDelete: {
     knowledgeName: 'Delete_Knowledge_CSV',
-    fileName: 'dummy.pdf',
-    fileType: 'application/pdf',
-    tags: ['Delete', 'Test', 'CSV','4']
+    fileName: 'csv/day.csv',
+    fileType: 'text/csv',
+    embeddingModel: 'sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2',
+    tags: ['Delete', 'Test', 'CSV']
   }
 }
 
@@ -70,26 +79,30 @@ export const csvTestCases = {
 export const xlsxTestCases = {
   basic: {
     knowledgeName: 'Excel_Knowledge_Basic',
-    fileName: 'dummy.pdf',
-    fileType: 'application/pdf',
+    fileName: 'xlsx/Comparison_table-SPEC-elevator.xlsx',
+    fileType: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+    embeddingModel: 'sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2',
     tags: ['Excel', 'XLSX', 'Test', 'Basic']
   },
   withCustomTags: {
     knowledgeName: 'Excel_Custom_Tags',
-    fileName: 'dummy.pdf',
-    fileType: 'application/pdf',
+    fileName: 'xlsx/Comparison_table-SPEC-elevator.xlsx',
+    fileType: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+    embeddingModel: 'sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2',
     tags: ['Custom_Tag1', 'Custom_Tag2', 'Excel', 'XLSX']
   },
   forUpdate: {
     knowledgeName: 'Update_Knowledge_Excel',
-    fileName: 'dummy.pdf',
-    fileType: 'application/pdf',
+    fileName: 'xlsx/Comparison_table-SPEC-elevator.xlsx',
+    fileType: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+    embeddingModel: 'sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2',
     tags: ['Update', 'Test', 'Excel', 'XLSX']
   },
   forDelete: {
     knowledgeName: 'Delete_Knowledge_Excel',
-    fileName: 'dummy.pdf',
-    fileType: 'application/pdf',
+    fileName: 'xlsx/Comparison_table-SPEC-elevator.xlsx',
+    fileType: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+    embeddingModel: 'sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2',
     tags: ['Delete', 'Test', 'Excel', 'XLSX']
   }
 }
@@ -98,20 +111,23 @@ export const xlsxTestCases = {
 export const pngTestCases = {
   basic: {
     knowledgeName: 'Image_Knowledge_Basic',
-    fileName: 'dummy.pdf',
-    fileType: 'application/pdf',
+    fileName: 'png/ภาพถ่ายหน้าจอ 2568-04-28 เวลา 10.00.54.png',
+    fileType: 'image/png',
+    embeddingModel: 'sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2',
     tags: ['Image', 'PNG', 'Test', 'Basic']
   },
   forUpdate: {
     knowledgeName: 'Update_Knowledge_Image',
-    fileName: 'dummy.pdf',
-    fileType: 'application/pdf',
+    fileName: 'png/ภาพถ่ายหน้าจอ 2568-04-28 เวลา 10.00.54.png',
+    fileType: 'image/png',
+    embeddingModel: 'sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2',
     tags: ['Update', 'Test', 'Image', 'PNG']
   },
   forDelete: {
     knowledgeName: 'Delete_Knowledge_Image',
-    fileName: 'dummy.pdf',
-    fileType: 'application/pdf',
+    fileName: 'png/ภาพถ่ายหน้าจอ 2568-04-28 เวลา 10.00.54.png',
+    fileType: 'image/png',
+    embeddingModel: 'sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2',
     tags: ['Delete', 'Test', 'Image', 'PNG']
   }
 }
@@ -119,27 +135,31 @@ export const pngTestCases = {
 // กรณีทดสอบต่างๆ สำหรับไฟล์ Word (DOCX)
 export const docxTestCases = {
   basic: {
-    knowledgeName: 'Test_pdf_cy',
-    fileName: 'XPeng_G6.pdf',
-    fileType: 'application/pdf',
-    tags: ['Word', 'DOCX', 'Test', 'Basic', 'XPeng_G6']
+    knowledgeName: 'Word_Knowledge_Basic',
+    fileName: 'docx/ตารางเปรียบเทียบโครงการ.docx',
+    fileType: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+    embeddingModel: 'sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2',
+    tags: ['Word', 'DOCX', 'Test', 'Basic']
   },
   withCustomTags: {
     knowledgeName: 'Word_Custom_Tags',
-    fileName: 'dummy.pdf',
-    fileType: 'application/pdf',
+    fileName: 'docx/ตารางวันหยุดประจำปี2025 ของบริษัท แยกตามประเทศ.docx',
+    fileType: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+    embeddingModel: 'sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2',
     tags: ['Custom_Tag1', 'Custom_Tag2', 'Word', 'DOCX']
   },
   forUpdate: {
     knowledgeName: 'Update_Knowledge_Word',
-    fileName: 'dummy.pdf',
-    fileType: 'application/pdf',
+    fileName: 'docx/256712111052494664190.docx',
+    fileType: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+    embeddingModel: 'sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2',
     tags: ['Update', 'Test', 'Word', 'DOCX']
   },
   forDelete: {
     knowledgeName: 'Delete_Knowledge_Word',
-    fileName: 'dummy.pdf',
-    fileType: 'application/pdf',
+    fileName: 'docx/256712111052494664190.docx',
+    fileType: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+    embeddingModel: 'sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2',
     tags: ['Delete', 'Test', 'Word', 'DOCX']
   }
 }
