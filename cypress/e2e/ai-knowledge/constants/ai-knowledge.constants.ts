@@ -19,6 +19,14 @@ export const pdfTestCases = {
     embeddingModel: 'sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2',
     tags: ['PDF', 'Test', 'Basic']
   },
+  ultimaker:{
+    knowledgeName: 'PDF_Knowledge_ultimaker',
+    fileName: 'pdf/ultimaker.pdf',
+    fileType: 'application/pdf',
+    embeddingModel: 'text-embedding-ada-002',
+    tags: ['PDF', 'Test', 'ultimaker']
+
+  },
   withLargeChunkSize: {
     knowledgeName: 'PDF_Large_Chunk',
     fileName: 'pdf/XPeng_G6.pdf',

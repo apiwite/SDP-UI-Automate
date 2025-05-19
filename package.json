@@ -7,7 +7,7 @@
     "test:headless": "cypress run"
   },
   "devDependencies": {
-    "cypress": "^14.3.2",
+    "cypress": "^14.3.3",
     "cypress-file-upload": "^5.0.8",
     "typescript": "^5.0.4"
   }

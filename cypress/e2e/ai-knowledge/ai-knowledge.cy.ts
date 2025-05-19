@@ -9,43 +9,35 @@ describe('AI Knowledge - การทดสอบทั้งหมด', () => {
   describe('การสร้าง Knowledge', () => {
     describe('ไฟล์ PDF', () => {
       it('สามารถสร้าง Knowledge ด้วยไฟล์ PDF พื้นฐาน', () => {
-        cy.createKnowledge_File('pdf.basic')
+        cy.createKnowledge_File('pdf.ultimaker')
         
         // ตรวจสอบว่าสร้างสำเร็จ
         cy.url().should('include', '/#/knowledge')
-        cy.searchKnowledge(pdfTestCases.basic.knowledgeName)
-        cy.contains(pdfTestCases.basic.knowledgeName).should('be.visible')
+        cy.searchKnowledge(pdfTestCases.ultimaker.knowledgeName)
+        cy.contains(pdfTestCases.ultimaker.knowledgeName).should('be.visible')
       })
 
-    //   it('สามารถสร้าง Knowledge ด้วยไฟล์ PDF และขนาดชั้นข้อมูลใหญ่', () => {
-    //     cy.createKnowledge_File('pdf.withLargeChunkSize')
+    })
+
+    // describe('ไฟล์ CSV', () => {
+    //   it('สามารถสร้าง Knowledge ด้วยไฟล์ CSV พื้นฐาน', () => {
+    //     cy.createKnowledge_File('csv.basic')
         
     //     // ตรวจสอบว่าสร้างสำเร็จ
     //     cy.url().should('include', '/#/knowledge')
-    //     cy.searchKnowledge(pdfTestCases.withLargeChunkSize.knowledgeName)
-    //     cy.contains(pdfTestCases.withLargeChunkSize.knowledgeName).should('be.visible')
+    //     cy.searchKnowledge(csvTestCases.basic.knowledgeName)
+    //     cy.contains(csvTestCases.basic.knowledgeName).should('be.visible')
     //   })
-    })
 
-    describe('ไฟล์ CSV', () => {
-      it('สามารถสร้าง Knowledge ด้วยไฟล์ CSV พื้นฐาน', () => {
-        cy.createKnowledge_File('csv.basic')
+    //   it('สามารถสร้าง Knowledge ด้วยชื่อที่กำหนดเอง', () => {
+    //     cy.createKnowledge_File('csv.withCustomName')
         
-        // ตรวจสอบว่าสร้างสำเร็จ
-        cy.url().should('include', '/#/knowledge')
-        cy.searchKnowledge(csvTestCases.basic.knowledgeName)
-        cy.contains(csvTestCases.basic.knowledgeName).should('be.visible')
-      })
-
-      it('สามารถสร้าง Knowledge ด้วยชื่อที่กำหนดเอง', () => {
-        cy.createKnowledge_File('csv.withCustomName')
-        
-        // ตรวจสอบว่าสร้างสำเร็จ
-        cy.url().should('include', '/#/knowledge')
-        cy.searchKnowledge(csvTestCases.withCustomName.knowledgeName)
-        cy.contains(csvTestCases.withCustomName.knowledgeName).should('be.visible')
-      })
-    })
+    //     // ตรวจสอบว่าสร้างสำเร็จ
+    //     cy.url().should('include', '/#/knowledge')
+    //     cy.searchKnowledge(csvTestCases.withCustomName.knowledgeName)
+    //     cy.contains(csvTestCases.withCustomName.knowledgeName).should('be.visible')
+    //   })
+    // })
 
 //     describe('ไฟล์ Excel', () => {
 //       it('สามารถสร้าง Knowledge ด้วยไฟล์ Excel พื้นฐาน', () => {

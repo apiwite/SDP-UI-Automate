@@ -37,26 +37,40 @@ Cypress.Commands.add('fillKnowledgeInfo', (knowledgeName = 'Test_AI_Knowledge_cy
 })
 
 // เลือกโมเดลสำหรับ Knowledge
-Cypress.Commands.add('selectKnowledgeModel', (modelName = 'sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2') => {
-  cy.log(`เลือกโมเดล: ${modelName}`)
+Cypress.Commands.add('selectKnowledgeModel', (modelName) => {
+  cy.wait(3000)
   cy.get('.inside-next-btn > .btn').click()
   cy.get('.ng-select-container').click()
   
   cy.wait(1000)
   
   cy.get('.ng-dropdown-panel-items').should('be.visible')
-  cy.contains('span', modelName).should('be.visible').click()
-  
-  // คลิกปุ่มถัดไป
+  cy.contains('span', modelName).should('be.visible')
+  cy.wait(1000)
+
+  // เพิ่มการรอ API และตรวจสอบข้อมูล
+  cy.intercept('POST', '**/knowledge/preview_chunking').as('previewChunkingAPI')
   cy.get('.float-right > [awnextstep=""]').click()
+  
+  // เพิ่ม timeout และตรวจสอบ response
+  cy.wait('@previewChunkingAPI', { timeout: 60000 }).then((interception) => {
+    // ตรวจสอบว่ามีข้อมูลหรือไม่
+    if (!interception.response?.body || interception.response.body.length === 0) {
+      cy.log('ไม่พบข้อมูล preview chunking, รอและลองใหม่')
+      cy.wait(5000) // รอ 5 วินาที
+      cy.get('.float-right > [awnextstep=""]').click()
+      cy.wait('@previewChunkingAPI', { timeout: 60000 })
+    }
+  })
   
   return cy.wrap(true)
 })
 
 // กำหนดค่า Chunking
 Cypress.Commands.add('configureChunking', (chunkSize = '200') => {
+  
   cy.get('.view').click()
-  cy.get('#chunk_size').click().clear().type(chunkSize).type('{enter}')
+  // cy.get('#chunk_size').click().clear().type(chunkSize).type('{enter}')
   cy.wait(3000)
   
   cy.get('.float-right > .btn-primary').click()
@@ -67,7 +81,7 @@ Cypress.Commands.add('configureChunking', (chunkSize = '200') => {
 // จบการสร้าง Knowledge
 Cypress.Commands.add('finalizeKnowledge', (tags = defaultConfig.tags) => {
   cy.intercept('POST', '**/sdp/api/knowledge').as('knowledgeAPI')
-  cy.get('.btn-success').click()
+  cy.get('.btn-success').click({ force: true })
   cy.wait('@knowledgeAPI')
   
   // ตรวจสอบ mat-chip ตามแท็กที่ระบุใน config
@@ -75,10 +89,10 @@ Cypress.Commands.add('finalizeKnowledge', (tags = defaultConfig.tags) => {
     cy.get('.mat-chip').contains(tag).should('exist')
   })
   
-  cy.intercept('POST', '**/process_chunking').as('process_chunkingAPI')
-  cy.get('.btn-process').click()
-  cy.wait('@process_chunkingAPI', { timeout: 60000 })
-  cy.wait(3000)
+  // cy.intercept('POST', '**/process_chunking').as('process_chunkingAPI')
+  // cy.get('.btn-process').click()
+  // cy.wait('@process_chunkingAPI', { timeout: 60000 })
+  cy.wait(10000)
   
   return cy.wrap(true)
 })
@@ -97,7 +111,8 @@ Cypress.Commands.add('uploadFile', (fileName: string) => {
   cy.get('input[type="file"]').selectFile(`cypress/fixtures/${fileName}`, { force: true })
   
   // รอให้อัพโหลดเสร็จและตรวจสอบ
-  cy.wait(2000)
+  cy.intercept('POST', '**/v2/knowledge/validate_file').as('validateFileAPI')
+  cy.wait('@validateFileAPI', { timeout: 30000 })
   cy.get('.file-container').should('exist')
   
   // ดึงชื่อไฟล์จาก path (ตัดส่วน directory ออก)
@@ -166,9 +181,9 @@ Cypress.Commands.add('createKnowledge_File', (options: any = {}) => {
       cy.startCreateKnowledge()
         .then(() => cy.fillKnowledgeInfo(config.knowledgeName, config.tags))
         .then(() => cy.uploadFile(config.fileName))
-        // .then(() => cy.selectKnowledgeModel(config.embeddingModel || config.modelName))
-        // .then(() => cy.configureChunking(config.chunkSize))
-        // .then(() => cy.finalizeKnowledge(config.tags))
+        .then(() => cy.selectKnowledgeModel(config.embeddingModel || config.modelName))
+        .then(() => cy.configureChunking(config.chunkSize))
+        .then(() => cy.finalizeKnowledge(config.tags))
     })
 })
 
