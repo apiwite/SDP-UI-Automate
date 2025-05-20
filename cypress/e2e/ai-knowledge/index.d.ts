@@ -68,13 +68,15 @@ declare namespace Cypress {
      * @example cy.createKnowledge_URL('gxHo')
      * @example cy.createKnowledge_URL({ url: 'https://example.com' })
      */
-    createKnowledge_URL(options?: any): Chainable<void>
+    createKnowledge_URL(): Chainable<void>
 
     /**
      * ค้นหา Knowledge ตามชื่อ
      * @example cy.searchKnowledge('Test Knowledge')
      */
     searchKnowledge(knowledgeName: string): Chainable<boolean>
+
+    processKnowledge(options?: any): Chainable<void>
 
     /**
      * เปิดฟอร์มแก้ไข Knowledge

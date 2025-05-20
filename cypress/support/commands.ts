@@ -8,7 +8,7 @@
 // คำสั่งสำหรับเข้าถึง URL หลักของระบบ
 Cypress.Commands.add('visitHost', (path = '') => {
   // const baseUrl = Cypress.env('BASE_URL')
-  const baseUrl = 'http://192.168.10.95'
+  const baseUrl = Cypress.config('baseUrl')
   cy.log(`Base URL: ${baseUrl}`)
   
   if (!baseUrl) {

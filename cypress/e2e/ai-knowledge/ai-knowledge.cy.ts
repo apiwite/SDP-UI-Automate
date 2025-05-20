@@ -15,6 +15,7 @@ describe('AI Knowledge - การทดสอบทั้งหมด', () => {
         cy.url().should('include', '/#/knowledge')
         cy.searchKnowledge(pdfTestCases.ultimaker.knowledgeName)
         cy.contains(pdfTestCases.ultimaker.knowledgeName).should('be.visible')
+        cy.processKnowledge()
       })
 
     })
